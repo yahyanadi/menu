@@ -25,7 +25,7 @@ body {
 header {
     background-image: 
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url("https://th.bing.com/th/id/R.255a341322e12df290c7156c76e892b9?rik=mt4a1SGo7HSMmg&riu=http%3a%2f%2fqatarsurvivalguide.com%2fwp-content%2fuploads%2f2016%2f08%2fshawarma.jpg&ehk=USHanuWp%2ffkiToLTw9F0JpDwvJnsU7s9ckxKy7Pj4oM%3d&risl=&pid=ImgRaw&r=0");
+        url("https://th.bing.com/th/id/R.255a341322e12df290c7156c76e892b9");
     background-size: cover;
     background-position: center;
     color: white;
@@ -35,11 +35,6 @@ header {
 
 header h1 {
     font-size: 42px;
-}
-
-header p {
-    margin-top: 10px;
-    font-size: 18px;
 }
 
 /* NAV */
@@ -55,10 +50,6 @@ nav a {
     color: white;
     text-decoration: none;
     font-weight: 500;
-}
-
-nav a:hover {
-    text-decoration: underline;
 }
 
 /* SECTIONS */
@@ -88,13 +79,6 @@ section h2 {
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.menu-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
 .price {
@@ -118,30 +102,10 @@ button:hover {
     background-color: #5a2100;
 }
 
-/* FORM */
-form {
-    max-width: 500px;
-    margin: auto;
-    background: white;
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0 20px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-/* MAP */
-iframe {
-    width: 100%;
-    height: 300px;
-    border-radius: 15px;
-    border: none;
+/* PANIER */
+#panier-liste p {
+    text-align: center;
+    margin: 8px 0;
 }
 
 /* FOOTER */
@@ -150,13 +114,6 @@ footer {
     color: white;
     padding: 25px;
     text-align: center;
-}
-
-/* RESPONSIVE */
-@media(max-width: 600px) {
-    header h1 {
-        font-size: 32px;
-    }
 }
 </style>
 </head>
@@ -170,7 +127,7 @@ footer {
 
 <nav>
     <a href="#menu">Menu</a>
-    <a href="#commande">Commander</a>
+    <a href="#panier">Panier</a>
     <a href="#contact">Contact</a>
 </nav>
 
@@ -180,68 +137,67 @@ footer {
 
 <div class="menu-grid">
 
-    <div class="menu-card" onclick="commanderRapide('Shawarma Poulet','35 DH')">
+    <div class="menu-card">
         <h3>Shawarma Poulet</h3>
         <p>Poulet mariné & sauce maison</p>
         <p class="price">35 DH</p>
-        <button>Commander</button>
+        <button onclick="ajouterAuPanier('Shawarma Poulet', 35)">
+            Ajouter au panier
+        </button>
     </div>
 
-    <div class="menu-card" onclick="commanderRapide('Shawarma Viande','40 DH')">
+    <div class="menu-card">
         <h3>Shawarma Viande</h3>
         <p>Bœuf épicé oriental</p>
         <p class="price">40 DH</p>
-        <button>Commander</button>
+        <button onclick="ajouterAuPanier('Shawarma Viande', 40)">
+            Ajouter au panier
+        </button>
     </div>
 
-    <div class="menu-card" onclick="commanderRapide('Shawarma Mixte','45 DH')">
+    <div class="menu-card">
         <h3>Shawarma Mixte</h3>
         <p>Poulet + viande</p>
         <p class="price">45 DH</p>
-        <button>Commander</button>
+        <button onclick="ajouterAuPanier('Shawarma Mixte', 45)">
+            Ajouter au panier
+        </button>
     </div>
 
-    <div class="menu-card" onclick="commanderRapide('Shawarma Fromage','38 DH')">
+    <div class="menu-card">
         <h3>Shawarma Fromage</h3>
         <p>Fondant & savoureux</p>
         <p class="price">38 DH</p>
-        <button>Commander</button>
+        <button onclick="ajouterAuPanier('Shawarma Fromage', 38)">
+            Ajouter au panier
+        </button>
     </div>
 
 </div>
 </section>
 
-<!-- COMMANDE -->
-<section id="commande">
-<h2>Commander Maintenant</h2>
+<!-- PANIER -->
+<section id="panier">
+<h2>🛒 Votre Panier</h2>
 
-<form onsubmit="envoyerWhatsApp(event)">
-    <input type="text" id="nom" placeholder="Votre nom" required>
-    <input type="tel" id="tel" placeholder="Téléphone" required>
-    <input type="text" id="adresse" placeholder="Adresse" required>
+<div id="panier-liste"></div>
 
-    <select id="produit" required>
-        <option>Shawarma Poulet</option>
-        <option>Shawarma Viande</option>
-        <option>Shawarma Mixte</option>
-        <option>Shawarma Fromage</option>
-    </select>
+<p style="text-align:center; font-weight:bold;">
+Total : <span id="total">0</span> DH
+</p>
 
-    <button type="submit">Commander via WhatsApp</button>
-</form>
+<button onclick="commanderPanier()" style="display:block;margin:20px auto;">
+Commander via WhatsApp
+</button>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-<h2>Nous Trouver</h2>
-
+<h2>Contact</h2>
 <p style="text-align:center;">
 📞 +212 6 12 34 56 78 <br>
-🕒 11h - 00h | Tous les jours
+🕒 11h - 00h
 </p>
-
-<br>
-<iframe src="https://www.google.com/maps?q=Casablanca&output=embed"></iframe>
 </section>
 
 <footer>
@@ -249,39 +205,47 @@ footer {
 </footer>
 
 <script>
-function envoyerWhatsApp(e) {
-    e.preventDefault();
+let panier = [];
+let total = 0;
 
-    const nom = document.getElementById("nom").value;
-    const tel = document.getElementById("tel").value;
-    const adresse = document.getElementById("adresse").value;
-    const produit = document.getElementById("produit").value;
-
-    const numero = "212682300363";
-
-    const message = `
-🌯 Nouvelle commande
-
-👤 Nom : ${nom}
-📞 Téléphone : ${tel}
-🏠 Adresse : ${adresse}
-🍽️ Produit : ${produit}
-`;
-
-    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(message)}`, "_blank");
+function ajouterAuPanier(produit, prix) {
+    panier.push({ produit, prix });
+    total += prix;
+    afficherPanier();
 }
 
-function commanderRapide(produit, prix) {
+function afficherPanier() {
+    const liste = document.getElementById("panier-liste");
+    const totalSpan = document.getElementById("total");
+
+    liste.innerHTML = "";
+
+    panier.forEach((item, index) => {
+        liste.innerHTML += `<p>${index + 1}. ${item.produit} - ${item.prix} DH</p>`;
+    });
+
+    totalSpan.textContent = total;
+}
+
+function commanderPanier() {
+    if (panier.length === 0) {
+        alert("Votre panier est vide !");
+        return;
+    }
+
     const numero = "212682300363";
+    let message = " Nouvelle commande\n\n";
 
-    const message = `
-🌯 Commande rapide
+    panier.forEach(item => {
+        message += `🍽️ ${item.produit} - ${item.prix} DH\n`;
+    });
 
-🍽️ Produit : ${produit}
-💰 Prix : ${prix}
-`;
+    message += `\n💰 Total : ${total} DH`;
 
-    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(
+        `https://wa.me/${numero}?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
 }
 </script>
 
