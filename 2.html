@@ -15,6 +15,14 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    border: 0;
+    border-radius: 15px;
+}
+
 }
 
 body {
@@ -39,9 +47,10 @@ header h1 {
     font-family: 'Amiri', serif; /* Police arabe style ottoman */
 }
 
+header p {
+    font-size: 18px;
 }
 
-}
 
 /* NAV */
 nav {
@@ -217,11 +226,29 @@ Commander via WhatsApp
 🕒 11h - 00h
 </p>
 </section>
+<!-- LOCALISATION -->
+<section id="location">
+  <h2>📍 Localisation</h2>
+  <div style="text-align:center;">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3320.123456!2d-7.589843!3d33.573110!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdxxx!2sShawarma%20Al-Beik!5e0!3m2!1sar!2sma!4v1699999999999!5m2!1sar!2sma" 
+      width="600" 
+      height="450" 
+      style="border:0; border-radius:15px;" 
+      allowfullscreen="" 
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+<!-- LOCALISATION -->
+<section id="location">
+  ...
+</section>
 
 <footer>
 <p>© 2025 Shawarma Palace — Tous droits réservés</p>
 </footer>
-
 <script>
 let panier = [];
 let total = 0;
